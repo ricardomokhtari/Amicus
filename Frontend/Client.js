@@ -5,7 +5,7 @@ The $ is a sign that jquery is being used. This first line essentially means onc
 been loaded this script will be run. This script is linked to the html by:
 <script src="xxx.js"></script>
 */
-$(document).ready(() => { // is ready(() the correct syntax ??
+$(document).ready(() => {
     console.log("Document loaded");
     // This initiates the 'Recording' class 
     const recording = new Recording();
