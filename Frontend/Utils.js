@@ -1,8 +1,11 @@
-// Doc containing functions for capturing client audio
-
+/*
+This contains the 'Recording' class which will be used for capturing client audio and piping it to 
+whatever ML/AI script or server we set up. If you want to get a better grasp of the audio API just
+console.log() different objects/functions in the pathway to help see how it all fits together. 
+*/
 class Recording {
     constructor (onLoadError) {
-
+        // Initialises all global variables within the class
         this._audioInput = null;
         this._processor = null;
         this._onLoadError = onLoadError;
@@ -17,45 +20,54 @@ class Recording {
         if (this._started) {
             throw new Error('Already started!');
         }
-
+        // Part of the API for capturing microphone audio
         this._audioContext = this._getAudioContext();
         this._started = true;
-
+        // This is the chrome request for capturing microphone audio.
         navigator.mediaDevices
             .getUserMedia({ audio: true })
+            // This binds the audio stream to the function _handleStream
             .then(this._handleStream.bind(this));
     }
 
+
     _handleStream(stream) {
-        //Original Code
+        // _activeStream now contains the stream object (this is not a buffer)
         this._activeStream = stream;
-        // This is where the media strea source is initialised. Will need to replace mic stream with dongle stream
+        // Part of the API for converting the stream object into a buffer of readable data (numbers)
         this._audioInput = this._audioContext.createMediaStreamSource(stream);
         this._processor = this._audioContext.createScriptProcessor(
             this._bufferSize,
             1,
             1
         );
+        // onaudioprocess means everytime the microphones buffer is filled, it will send
+        // that data to the function _processMicrophone - look at _processMicrophone function
         this._processor.onaudioprocess = this._processMicrophone.bind(
             this
         );
-
+        // Again part of the API connecting the stream object to readable data. 
         this._audioInput.connect(this._processor);
         this._processor.connect(this._audioContext.destination);
     }
 
     _processMicrophone(event) {
-        
-        const originalBuffer = event.inputBuffer.getChannelData(0); // (for use of internal microphone's audio)
+        // originalBuffer is the raw data from the microphone's buffer. 
+        const originalBuffer = event.inputBuffer.getChannelData(0); 
+        // chunkBuffer will be whatever data processing we need to do (shall explain)
         const chunkBuffer = this._getChunkBuffer(originalBuffer);
-
+        // This just collects the buffers into an array called chunkObject. Kinda stopped after this. 
+        // We would pipe this _chunkObject into a ML script/server, and then create a different function
+        // which recieves the reply from that script/server. Then we create a little dynamic bit on the 
+        // html which displays that response. 
         this._chunkObject.push(chunkBuffer);
 
         console.log(this._chunkObject);
     }
 
     _getChunkBuffer(buffer) {
-        /* This might be neccessary unsure. 
+        /* This might be neccessary for audio data processing - will figure out later once the ML is tested. 
+
         // buffer.length == 4096
         const chunk = new ArrayBuffer(buffer.length * 2);
         let offset = 0;
@@ -76,6 +88,7 @@ class Recording {
     }
 
     _getAudioContext() {
+        // Part of the API - AudioContext provides a lot of parameters for reading the data. 
         return new (window.AudioContext || window.webkitAudioContext)();
     }
 
@@ -88,6 +101,7 @@ class Recording {
     }
 
     _reset() {
+        // This just resets everything and stops the code 'listening' to the microphone. 
         this._chunkObject = [];
   
         this._audioInput = null;
