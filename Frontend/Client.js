@@ -8,14 +8,14 @@ been loaded this script will be run. This script is linked to the html by:
 $(document).ready(() => {
     console.log("Document loaded");
     // This initiates the 'Recording' class 
-    const recording = new Recording();
+    const audio_pipe = new Audio_Pipe();
     // This links the button object in index.html to the function recording.start() - look at Utils.js
     $('#Start_Recording').on('click', () => {
-        recording.start();
+        audio_pipe.start();
     });
     // This links the button object in index.html to the function recording.stop() - look at Utils.js
     $('#Stop_Recording').on('click', () => {
-        recording.stop();
+        audio_pipe.stop();
     });
 
     $(window).on('beforeunload', () => {

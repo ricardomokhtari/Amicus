@@ -3,7 +3,9 @@ This contains the 'Recording' class which will be used for capturing client audi
 whatever ML/AI script or server we set up. If you want to get a better grasp of the audio API just
 console.log() different objects/functions in the pathway to help see how it all fits together. 
 */
-class Recording {
+// const WaveFile = require('wavefile');
+
+class Audio_Pipe {
     constructor (onLoadError) {
         // Initialises all global variables within the class
         this._audioInput = null;
@@ -12,57 +14,44 @@ class Recording {
         this._started = false;
         this._handleSuccess = null;
         this._bufferSize = 1024;
-        this._chunkObject = [];
+        this._wavBuffer = [];
     
     }
 
     start() {
-        if (this._started) {
-            throw new Error('Already started!');
-        }
-        // Part of the API for capturing microphone audio
-        this._audioContext = this._getAudioContext();
-        this._started = true;
-        // This is the chrome request for capturing microphone audio.
-        navigator.mediaDevices
-            .getUserMedia({ audio: true })
-            // This binds the audio stream to the function _handleStream
+        console.log('Recording started')
+        // AudioContext for creating audio nodes and processing.
+        this._audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        // This is the request for capturing microphone audio.
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            // This binds the audio stream to the function _handleStream.
             .then(this._handleStream.bind(this));
     }
 
-
     _handleStream(stream) {
-        // _activeStream now contains the stream object (this is not a buffer)
+        // This is the audio stream object. 
         this._activeStream = stream;
-        // Part of the API for converting the stream object into a buffer of readable data (numbers)
+        // Creates an audio node for the media stream (audio data requires a AudioContext).
         this._audioInput = this._audioContext.createMediaStreamSource(stream);
-        this._processor = this._audioContext.createScriptProcessor(
-            this._bufferSize,
-            1,
-            1
-        );
-        // onaudioprocess means everytime the microphones buffer is filled, it will send
-        // that data to the function _processMicrophone - look at _processMicrophone function
-        this._processor.onaudioprocess = this._processMicrophone.bind(
-            this
-        );
-        // Again part of the API connecting the stream object to readable data. 
+        // Deprecated but sill functional. Creates a ScriptProcessorNode used for direct audio processing. Alternatively can use AudioWorkletNode method. 
+        this._processor = this._audioContext.createScriptProcessor(this._bufferSize, 1, 1);
+        // Every time the buffer is sent run _processMicrophone(buffer)
+        this._processor.onaudioprocess = this._processMicrophone.bind(this);
+        
+        // This is only neccessary to pipe live data somewhere. 
         this._audioInput.connect(this._processor);
         this._processor.connect(this._audioContext.destination);
     }
 
     _processMicrophone(event) {
-        // originalBuffer is the raw data from the microphone's buffer. 
+        // originalBuffer is the raw data from the microphone's buffer. This is an Float32Array of sound intensities
         const originalBuffer = event.inputBuffer.getChannelData(0); 
         // chunkBuffer will be whatever data processing we need to do (shall explain)
         const chunkBuffer = this._getChunkBuffer(originalBuffer);
-        // This just collects the buffers into an array called chunkObject. Kinda stopped after this. 
-        // We would pipe this _chunkObject into a ML script/server, and then create a different function
-        // which recieves the reply from that script/server. Then we create a little dynamic bit on the 
-        // html which displays that response. 
-        this._chunkObject.push(chunkBuffer);
 
-        console.log(this._chunkObject);
+        console.log(chunkBuffer);
+
+        this._wavBuffer.push(chunkBuffer);
     }
 
     _getChunkBuffer(buffer) {
@@ -87,17 +76,10 @@ class Recording {
        return buffer; 
     }
 
-    _getAudioContext() {
-        // Part of the API - AudioContext provides a lot of parameters for reading the data. 
-        return new (window.AudioContext || window.webkitAudioContext)();
-    }
-
     stop() {
-        if (!this._started) {
-            throw new Error('Already stopped!');
-        }
-        console.log("Recording Stopped");
+        console.log("Recording stopped");
         this._reset();
+
     }
 
     _reset() {
