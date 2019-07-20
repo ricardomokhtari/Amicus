@@ -23,7 +23,6 @@ import pandas as pd
 #train is a dataframe containing item ID and Class
 train = pd.read_csv('train/train.csv')
 
-
 # the parser function converts .wav files to numpy arrays with associated label
 def parser(row):
     
@@ -39,7 +38,17 @@ def parser(row):
       
       X, sample_rate = librosa.load(file_name, res_type='kaiser_fast')
       
-      # we extract mfcc feature from data
+      # we extract MFCC features from data
+      
+      # MFCC (Mel Frequency Cepstral Coefficient) is a method of representing an audio signal
+      # in the frequency domain
+      # the MFCCs together make up the Mel Frequency Ceptrum (the representation), which is
+      # the power spectrum of the audio signal
+      # The MFC is derived by taking the Fourier Transform of the audio signal, mapping the
+      # resulting power signal onto the mel scale and then performing a cosine transform
+      # the amplitudes of the cosine transform are the MFCCs
+      # It is much more efficient to handle audio signals in this way
+      
       mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=40).T,axis=0) 
       
    except Exception:
@@ -54,18 +63,15 @@ def parser(row):
 # train.apply(function, axis) applies a function to every row or column of a dataframe
 # axis = 1 means we apply the parser function to every column
 temp = train.apply(parser, axis=1) # executing this line takes a long time
-temp.columns = ['feature', 'label']
-
+temp.columns = ['feature','label']
 
 # the code below is for preparing the data and training the model - incomplete
-
-"""
 
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import np_utils
 
-X = np.array(temp.feature.tolist())
-y = np.array(temp.label.tolist())
+X = np.array(train.ID.tolist())
+y = np.array(train.Class.tolist())
 
 lb = LabelEncoder()
 
@@ -96,6 +102,4 @@ model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
 
-model.fit(X, y, batch_size=32, epochs=5, validation_data=(val_x, val_y))
-
-"""
+model.fit(X, y, batch_size=32, epochs=5, validation_data=(X, y))
