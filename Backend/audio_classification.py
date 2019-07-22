@@ -112,3 +112,17 @@ model.add(Activation('softmax'))
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
 
 model.fit(X, y, batch_size=32, epochs=20)   # epochs defines the number of iterations of the model
+
+
+# testing model on test data
+# 5.wav is drilling
+# Putting 5.wav into the model creates a (1,10) row vector in which there is a 1 in column 4
+# Checking with the encoding shows that column 4 = drilling, so the model works well
+
+data, SR = librosa.load('test/Test/5.wav')
+mfccs = np.mean(librosa.feature.mfcc(y=data, sr=SR, n_mfcc=40).T, axis=0)
+mfccs = np.asarray([mfccs])
+
+output = model.predict([mfccs])     # mfccs needs to be reshaped because the input is of form (1,40)
+
+print(output)
