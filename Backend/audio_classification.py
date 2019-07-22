@@ -4,6 +4,24 @@
 Created on Mon Jul 15 13:47:17 2019
 
 @author: Ricardo
+
+This script trains a deep learning model based on the keras.sequential
+Neural Network.
+
+The training set consists of 5435 different sounds each around 4 seconds long.
+The sounds have the following classes:
+    Siren
+    Street music
+    Drilling
+    Dog barking
+    Children Playing
+    Gunshot
+    Engine
+    Air conditioner
+    Jackhammer
+    Car horn
+After 20 iterations, the model is able to distinguish the test sounds with 75% accuracy
+
 """
 
 import librosa
