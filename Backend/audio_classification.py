@@ -20,7 +20,7 @@ The sounds have the following classes:
     Air conditioner
     Jackhammer
     Car horn
-After 20 iterations, the model is able to distinguish the test sounds with 75% accuracy
+After 100 iterations, the model is able to distinguish the test sounds with 86% accuracy
 
 """
 
@@ -114,11 +114,11 @@ num_labels = y.shape[1]
 filter_size = 2
 
 # build model
-model = Sequential()
+model = Sequential()                        # construct model with default values
 
-model.add(Dense(256, input_shape=(40,)))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
+model.add(Dense(256, input_shape=(40,)))    # .add is used to add a layer - 256 is dimensionality of ouput space
+model.add(Activation('relu'))               # relu - rectified linear unit, returns a tensor
+model.add(Dropout(0.5))                     # dropout prevents overfitting
 
 model.add(Dense(256))
 model.add(Activation('relu'))
@@ -127,9 +127,9 @@ model.add(Dropout(0.5))
 model.add(Dense(num_labels))
 model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
+model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam') # compile method prepares the model for training
 
-model.fit(X, y, batch_size=32, epochs=20)   # epochs defines the number of iterations of the model
+model.fit(X, y, batch_size=32, epochs=100, validation_split = 0.3)   # epochs defines the number of iterations of the model
 
 
 # testing model on test data
