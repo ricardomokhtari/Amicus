@@ -21,15 +21,12 @@
     }
 
     #DC_Logo{
-      width: 80px;
-      height: 70px;
+      width: 5.5vw;
+      height: 5vw;
     }
 
     #main_text{
       font-size: 2.5vw;
-      padding-left: 10px;
-      padding-top: 30px;
-      padding-bottom: 50px;
     }
 
     #head_text{
@@ -37,9 +34,32 @@
       align-items: center;
     }
 
+    #brain_image{
+      width: 20vw;
+      height: 20vw;
+      margin: auto;
+    }
+
+    #left{
+      margin: auto;
+    }
+
+    #chat_image{
+      width: 20vw;
+      height: 20vw;
+      margin: auto;
+      display: block;
+    }
+
     .jumbotron {
       background-color: #AE53FB;
       color: white;
+    }
+
+    .container{
+      margin-right: 0;
+      margin-left: 0;
+      padding: 0;
     }
 
     .hidden {
@@ -68,32 +88,47 @@
       <h1>Dementia Chatbot</h1>
     </div>
   </div>
+
+
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div class="page-header">
         <img src="Images/Logo1.jpg" id="DC_Logo" alt="Dementia Chatbot Logo">
         <span id="DementiaChatbotLogo">DementiaChatbot</span>
       </div>
     </nav>
+
+
+</div>
   <div class="jumbotron">
-    <div class="col-lg-6"  id="head_text">
-      <p align="center"><b>Welcome to the DementiaChatbot!</b></p>
-    </div>
-    <div class="col-lg-6" id="main_text">
-      <p align="justify">
-        <b>
-          We use cutting edge algorithms and artificial intelligence to analyse your speech patterns and provide a diagnosis from the comfort of your own home!
-        </b>
-      </p>
-      <p align="justify">
-        <b>
-          Get started today by clicking the button below:
-        </b>
-    </div>
-    <div class="btn-group btn-group-lg" role="group">
-          <button type="button" class="btn btn-info" id="Start_Recording">Start Diagnosis Recording</button>
-          <button type="button" class="btn btn-info" id="Stop_Recording">Stop Diagnosis Recording</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6"  id="head_text">
+          <p align="center"><b>Welcome to the DementiaChatbot!</b></p>
+          <p align = "justify" id="main_text">
+          <b>
+            We use cutting edge algorithms and artificial intelligence to analyse your speech patterns and provide a diagnosis from the comfort of your own home!
+          </b>
+          </p>
+          <p id="main_text">
+            <b>
+              Get started today by clicking the button below:
+            </b>
+          </p>
+          <div class="btn-group btn-group-lg" role="group">
+                <button type="button" class="btn btn-info" id="Start_Recording">Start Diagnosis Recording</button>
+                <button type="button" class="btn btn-info" id="Stop_Recording">Stop Diagnosis Recording</button>
+          </div>
+        </div>
+        <div class="col-xl-6" id="left">
+          <img src="Images/brain.svg" alt="Brain" id="brain_image">
+          <img src="Images/quotation.svg" alt="Quotes" id="brain_image">
+          <img src="Images/chat.svg" alt="Chat" id="chat_image">
+        </div>
+      </div>
     </div>
   </div>
+
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 </body>
