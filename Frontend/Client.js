@@ -16,6 +16,10 @@ $(document).ready(() => {
     // This links the button object in index.html to the function recording.stop() - look at Utils.js
     $('#Stop_Recording').on('click', () => {
         audio_pipe.stop();
+
+        $.post('http://localhost:8080', 
+                audio_pipe._wavBuffer);
+            
     });
 
     $(window).on('beforeunload', () => {
