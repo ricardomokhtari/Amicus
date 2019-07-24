@@ -19,7 +19,7 @@ $(document).ready(() => {
 
         $.post('http://localhost:8080', 
                 audio_pipe._wavBuffer);
-            
+        
     });
 
     $(window).on('beforeunload', () => {
