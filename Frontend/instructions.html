@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
-<title>Passage Page</title>
+<title>Instructions</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="Utils.js"></script>
 <script src="Client.js"></script>
+</head>
 
 <style type="text/css">
-
   #DementiaChatbotLogo{
     font-size: 2vw;
     vertical-align: middle;
@@ -21,16 +21,15 @@
     color: #AE53FB;
   }
 
-  #main_text{
-    font-size: 4vw;
-    font-family: 'Century Gothic';
-    color: #AE53FB;
-    line-height: 90px;
-  }
-
   #DC_Logo{
     width: 5.5vw;
     height: 5vw;
+  }
+
+  #main_text{
+    font-size: 2.3vw;
+    font-family: 'Century Gothic';
+    color: #AE53FB;
   }
 
   .container{
@@ -51,21 +50,25 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-xl-9">
-        <p align="justify" id="main_text">
-          <b>Signing is one way in which animals can interact with one another. Male black-birds use their melodious songs to catch the attention of the females.</b>
+      <div class="col-xl-8 offset-xl-2">
+        <p align = "justify" id="main_text">
+          <b>Welcome!</b>
         </p>
-        <div class="btn-group btn-group-lg">
-          <button class="btn btn-info" id="Start_Recording">Start Recording</button>
-          <button type="button" class="btn btn-info btn-lg" id = "Stop_Recording">Stop Recording</button>
-        </div>
+        <p align = "justify" id="main_text">
+          <b>We are going to analyse your speech on the next page. To go to the next page press the 'Go to next page' button below.</b>
+        </p>
+        <p align = "justify" id="main_text">
+          <b>On the next page you will see a 'Start Recording' button, followed by a passage and then a 'Stop Recording' button. Click on the 'Start Recording' button to allow microphone acess and then read the passage as normal. When you are done, press the 'Stop Recording' button.</b>
+        </p>
+        <a href="passage.html">
+        <button type="button" class="btn btn-info btn-lg" href="passage.html">Go to Next Page</button></a>
       </div>
     </div>
+
   </div>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 </body>
-
-</head>
 </html>
