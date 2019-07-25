@@ -11,9 +11,10 @@ server.on('request', function(req, res) {
     if (req.method == 'POST') {
         req.on('data', function(msg) {
             console.log(msg);
+            console.log(new Float32Array(msg, 0, 1024));
         // POST is ended 
         }).on('error', function(error) {
-            console.log(error.stack)
+            console.log(error.stack);
         });
 
         // Need to set 'res' parameters, so HTTP server doesn't freeze. 
