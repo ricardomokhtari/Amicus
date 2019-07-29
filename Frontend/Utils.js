@@ -54,7 +54,9 @@ class Audio_Pipe {
                 originalBuffer.toString(),
                 );
         */
-        this._wavBuffer.push(originalBuffer);
+        for (var i = 0; i < originalBuffer.length; i++) {
+            this._wavBuffer.push(originalBuffer[i]);
+        }
     }
 
     stop() {

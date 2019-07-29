@@ -9,6 +9,7 @@ var server = http.createServer();
 console.log("Server Active");
 
 var audio_array = [];
+var datas = [];
 
 // Once HTTP is connected do function
 server.on('request', function(req, res) {
@@ -16,28 +17,22 @@ server.on('request', function(req, res) {
     if (req.method == 'POST') {
         req.on('data', function(msg) {
 
-            var datas = [];
-
             if (msg.toString() == 404) {
 
                 let wav = new WaveFile();
-                // console.log(audio_array.length);
-                // wav.fromScratch(1, 44100, '32f', audio_array);
-                // fs.writeFileSync('Audio/Test.wav', wav.toBuffer());
+                datas = new Float32Array(datas);
+                console.log(datas)
+                wav.fromScratch(1, 44100, '32f', datas);
+                fs.writeFileSync('Audio/Test.wav', wav.toBuffer());
 
             } else {
                 msg = msg.toString();
-                msg = msg.replace((/(\n|\r)/g, '0'));
-                // console.log(msg);
 
                 data = msg.split(",");
-                console.log(data)
                 for (var i = 0; i < data.length; i++) {
                     datas.push(data[i]);
                     }
 
-                // console.log(datas.length)
-                audio_array.push(new Float32Array(datas));
 
             }
         // POST is ended 
