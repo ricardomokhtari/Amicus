@@ -49,17 +49,23 @@ class Audio_Pipe {
         // originalBuffer is the raw data from the microphone's buffer. This is an Float32Array of sound intensities
         const originalBuffer = event.inputBuffer.getChannelData(0); 
         // chunkBuffer will be whatever data processing we need to do (shall explain)
-        console.log(originalBuffer);
-        const buff = Buffer.from(originalBuffer, 0, 1024)
-        console.log(buff)
+        /*
         $.post('http://localhost:8080', 
-                buff,
+                originalBuffer.toString(),
                 );
+        */
         this._wavBuffer.push(originalBuffer);
     }
 
     stop() {
         console.log("Recording stopped");
+        $.post('http://localhost:8080', 
+        this._wavBuffer.toString(),
+        );
+        console.log(this._wavBuffer.length)
+        $.post('http://localhost:8080', 
+        '404',
+        );
         this._reset();
     }
 

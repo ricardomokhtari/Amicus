@@ -17,10 +17,7 @@ $(document).ready(() => {
     $('#Stop_Recording').on('click', () => {
         audio_pipe.stop();
         console.log(audio_pipe._wavBuffer);
-        /*
-        $.post('http://localhost:8080', 
-                audio_pipe._wavBuffer);
-        */
+  
     });
 
     $(window).on('beforeunload', () => {
