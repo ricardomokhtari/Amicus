@@ -42,7 +42,7 @@ Code below used for loading and visualising .wav files
 """
 
 # train is a dataframe containing item ID and Class
-train = pd.read_csv('')
+train = pd.read_csv('Backend/train.csv')
 
 # lists for storing features (X) and labels (y)
 features = []
@@ -90,7 +90,7 @@ def parser(row):
 
 # train.apply(function, axis) applies a function to every row or column of a dataframe
 # axis = 1 means we apply the parser function to every column
-temp = train.apply(parser, axis=1) # executing this line takes a long time
+train.apply(parser, axis=1) # executing this line takes a long time
 
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import np_utils
@@ -129,7 +129,7 @@ model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam') # compile method prepares the model for training
 
-model.fit(X, y, batch_size=32, epochs=100)   # epochs defines the number of iterations of the model
+model.fit(X, y, batch_size=32, epochs=5)   # epochs defines the number of iterations of the model
 
 
 # testing model on test data
@@ -137,7 +137,7 @@ model.fit(X, y, batch_size=32, epochs=100)   # epochs defines the number of iter
 # Putting 5.wav into the model creates a (1,10) row vector in which there is a 1 in column 4
 # Checking with the encoding shows that column 4 = drilling, so the model works well
 
-data, SR = librosa.load('')
+data, SR = librosa.load('Backend/test_unaffected.wav')
 mfccs = np.mean(librosa.feature.mfcc(y=data, sr=SR, n_mfcc=40).T, axis=0)
 mfccs = np.asarray([mfccs])
 
