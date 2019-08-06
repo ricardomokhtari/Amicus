@@ -30,6 +30,7 @@ server.on('request', function(req, res) {
 
                 data = msg.split(",");
                 for (var i = 0; i < data.length; i++) {
+                    // if ()
                     datas.push(data[i]);
                     }
 
