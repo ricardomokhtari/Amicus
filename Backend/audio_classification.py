@@ -8,20 +8,6 @@ Created on Mon Jul 15 13:47:17 2019
 This script trains a deep learning model based on the keras.sequential
 Neural Network.
 
-The training set consists of 5435 different sounds each around 4 seconds long.
-The sounds have the following classes:
-    Siren
-    Street music
-    Drilling
-    Dog barking
-    Children Playing
-    Gunshot
-    Engine
-    Air conditioner
-    Jackhammer
-    Car horn
-After 100 iterations, the model is able to distinguish the test sounds with 86% accuracy
-
 """
 
 import librosa
@@ -134,17 +120,9 @@ model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='
 
 model.fit(X_train, y_train, batch_size=32, epochs=20)   # epochs defines the number of iterations of the model
 
-
-# testing model on test data
-# 5.wav is drilling
-# Putting 5.wav into the model creates a (1,10) row vector in which there is a 1 in column 4
-# Checking with the encoding shows that column 4 = drilling, so the model works well
-
+# testing the model
 data, SR = librosa.load('Backend/Test/test_affected.wav')
 mfccs = np.mean(librosa.feature.mfcc(y=data, sr=SR, n_mfcc=128).T, axis=0)
 mfccs = np.asarray([mfccs])
 
 y_pred = model.predict(mfccs)     # mfccs needs to be reshaped because the input is of form (1,40)
-
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_pred)
