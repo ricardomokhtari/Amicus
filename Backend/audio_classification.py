@@ -74,7 +74,7 @@ def parser(row):
       # the amplitudes of the cosine transform are the MFCCs
       # It is much more efficient to handle audio signals in this way
       
-      mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=40).T,axis=0) 
+      mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=1000).T,axis=0) 
       
    except Exception:
       print("Error encountered while parsing file: ", file_name)
@@ -104,6 +104,9 @@ lb = LabelEncoder()     # y has to be encoded for passing into model
 
 y = np_utils.to_categorical(lb.fit_transform(y))    # y is categorical so it has to be OneHotEncoded
 
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
+
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Convolution2D, MaxPooling2D
@@ -116,7 +119,7 @@ filter_size = 2
 # build model
 model = Sequential()                        # construct model with default values
 
-model.add(Dense(256, input_shape=(40,)))    # .add is used to add a layer - 256 is dimensionality of ouput space
+model.add(Dense(256, input_shape=(128,)))    # .add is used to add a layer - 256 is dimensionality of ouput space
 model.add(Activation('relu'))               # relu - rectified linear unit, returns a tensor
 model.add(Dropout(0.5))                     # dropout prevents overfitting
 
@@ -129,7 +132,7 @@ model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam') # compile method prepares the model for training
 
-model.fit(X, y, batch_size=32, epochs=5)   # epochs defines the number of iterations of the model
+model.fit(X_train, y_train, batch_size=32, epochs=20)   # epochs defines the number of iterations of the model
 
 
 # testing model on test data
@@ -137,10 +140,11 @@ model.fit(X, y, batch_size=32, epochs=5)   # epochs defines the number of iterat
 # Putting 5.wav into the model creates a (1,10) row vector in which there is a 1 in column 4
 # Checking with the encoding shows that column 4 = drilling, so the model works well
 
-data, SR = librosa.load('Backend/test_unaffected.wav')
-mfccs = np.mean(librosa.feature.mfcc(y=data, sr=SR, n_mfcc=40).T, axis=0)
+data, SR = librosa.load('Backend/Test/test_affected.wav')
+mfccs = np.mean(librosa.feature.mfcc(y=data, sr=SR, n_mfcc=128).T, axis=0)
 mfccs = np.asarray([mfccs])
 
-output = model.predict([mfccs])     # mfccs needs to be reshaped because the input is of form (1,40)
+y_pred = model.predict(mfccs)     # mfccs needs to be reshaped because the input is of form (1,40)
 
-print(output)
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test, y_pred)
