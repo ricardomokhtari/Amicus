@@ -118,11 +118,11 @@ model.add(Activation('softmax'))
 
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam') # compile method prepares the model for training
 
-for i in range(8):
+for i in range(15):
     model.fit(X_train, y_train, batch_size=32, epochs=20)   # epochs defines the number of iterations of the model
 
 # testing the model
-data, SR = librosa.load('Backend/Test/test_affected.wav')
+data, SR = librosa.load('Backend/Test/test_affected2.wav')
 mfccs = np.mean(librosa.feature.mfcc(y=data, sr=SR, n_mfcc=128).T, axis=0)
 mfccs = np.asarray([mfccs])
 
