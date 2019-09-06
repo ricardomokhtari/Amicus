@@ -1,5 +1,5 @@
 Goal:
-To create a verbal chatbot AI that converses with users with 2 aims:
+To create a verbal voice assistant AI that converses with users with 2 aims:
 1. To present cognitive tests to the user that assess cognition
 2. To help the user learn more about dementia by responding to questions
 
