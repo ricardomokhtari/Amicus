@@ -1,4 +1,4 @@
-Amicus - an open source, educational and diagnostic tool for dementia 
+AMICUS - an open source, educational and diagnostic tool for dementia 
 
 Goal:
 To create a verbal voice assistant AI that converses with users with 2 aims:
