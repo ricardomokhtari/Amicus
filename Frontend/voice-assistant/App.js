@@ -5,14 +5,22 @@ import './App.css'
 
 class App extends Component {
   state = {
-    text: "Hello, press receive data to get response from script.py"
+    // App component has state text which is passed to textResponse via props
+    text: ""
   }
 
   constructor(){
     super()
+    // binding this to getData()
     this.getData = this.getData.bind(this)
   }
 
+  // extract initial message from chatbot script and display
+  componentDidMount(){
+    this.getData()
+  }
+
+  // function that requests data from backend server
   getData() {
     // create a new XMLHttpRequest
     var xhr = new XMLHttpRequest()
