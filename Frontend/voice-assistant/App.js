@@ -6,18 +6,13 @@ import './App.css'
 class App extends Component {
   state = {
     // App component has state text which is passed to textResponse via props
-    text: ""
+    text: "Hello, my name is Amicus, your virtual assistant. Ask me anything about dementia..."
   }
 
   constructor(){
     super()
     // binding this to getData()
     this.getData = this.getData.bind(this)
-  }
-
-  // extract initial message from chatbot script and display
-  componentDidMount(){
-    this.getData()
   }
 
   // function that requests data from backend server
@@ -35,16 +30,18 @@ class App extends Component {
     // open the request with the verb and the url
     xhr.open('POST', 'http://localhost:8080')
     // send the request
-    xhr.send(JSON.stringify({example: "data"}))
+    xhr.send(JSON.stringify({user_input: "How many people in the UK have dementia?"}))
   }
 
   render () {
     return (
       <React.Fragment>
         <main className = "App">
-          <Logo />
-          <TextResponse text = {this.state.text} />
-          <button onClick = {this.getData} className = "btn btn-secondary btn-m m-2">Receive Data</button>
+          <div className = "container">
+            <Logo />
+            <TextResponse text = {this.state.text} />
+            <button onClick = {this.getData} className = "btn btn-secondary btn-m m-2">Send New Request</button>
+          </div>
         </main>
       </React.Fragment>
     )
