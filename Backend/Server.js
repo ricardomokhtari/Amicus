@@ -15,10 +15,10 @@ var server = http.createServer(function(req, res) {
     req.on('end', function() {
         console.log("HTTP GET received")
         data = JSON.parse(data.toString())
-        console.log("JSON: " + data.example)
+        console.log("JSON: " + data.user_input)
 
         // data = {response: "long string response"}
-        const process = spawn('python', ['./script.py', data.example]);
+        const process = spawn('python', ['./Chatbot.py', data.user_input]);
         var script_output = []
         process.stdout.on('data', (data) => {
             console.log("(python) stdout: " + data.toString())
