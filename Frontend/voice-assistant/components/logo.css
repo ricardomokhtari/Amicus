@@ -1,10 +1,15 @@
+/*
+
+Styling and animation of the App logo
+
+author: Ricardo
+
+*/
+
 .App-logo {
     animation: App-logo-spin infinite 15s linear;
-    height: 45vmin;
-    pointer-events: none;
-    justify-content: center;
+    height: 40vmin;
     align-items: center;
-    text-align: center;
 }
 
 @keyframes App-logo-spin {

@@ -1,3 +1,10 @@
+"""
+
+A very basic chatbot/voice-assistant AI
+
+"""
+
+
 #import necessary libraries
 import io
 import random
@@ -17,7 +24,6 @@ nltk.download('popular', quiet=True) # for downloading packages
 # uncomment the following only the first time
 #nltk.download('punkt') # first-time use only
 #nltk.download('wordnet') # first-time use only
-
 
 #Reading in the corpus
 with open('chatbot.txt','r', encoding='utf8', errors ='ignore') as fin:
@@ -75,8 +81,8 @@ if(user_response!='bye'):
         if(greeting(user_response)!=None):
             print(greeting(user_response))
         else:
-            print(response(user_response) + "\nAsk me something else or type 'bye' to exit...")
+            print(response(user_response))
             sent_tokens.remove(user_response)
 else:
     flag=False
-    print("ROBO: Bye! take care..")
+    print("Bye! take care..")

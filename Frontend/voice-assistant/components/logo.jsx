@@ -1,3 +1,11 @@
+/*
+
+Renders the App logo
+
+author: Ricardo
+
+*/
+
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './logo.css';

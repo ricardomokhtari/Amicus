@@ -1,3 +1,12 @@
+/*
+
+Script that creates a local development server for making calls
+to backend scripts and data piping & processing
+
+author: Samuel
+
+*/
+
 const http = require('http')
 const { spawn } = require('child_process')
 
