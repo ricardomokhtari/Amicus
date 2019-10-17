@@ -1,7 +1,10 @@
-# AMICUS
-### An open source, educational and diagnostic tool for dementia
+# AMICUS - An open source, educational and diagnostic tool for dementia
 
-#### NOTE: This is a work in progress. In its current state, Amicus behaves like a very basic version of Siri/Google Assistant (except interface is via text not speech). More to come!
+## NOTE: This is a work in progress. 
+
+#### In its current state, Amicus behaves like a very basic version of Siri/Google Assistant (except text not speech input).
+
+#### More to come!
 
 Goal:
 To create a verbal voice assistant AI that converses with users with 2 aims:
