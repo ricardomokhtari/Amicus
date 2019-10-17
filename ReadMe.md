@@ -2,7 +2,7 @@
 
 ## NOTE: This is a work in progress. 
 
-#### In its current state, Amicus behaves like a very basic version of Siri/Google Assistant (except text not speech input).
+### In its current state, Amicus behaves like a very basic version of Siri/Google Assistant (except text not speech input).
 
 #### More to come!
 
