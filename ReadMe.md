@@ -8,4 +8,12 @@ To create a verbal voice assistant AI that converses with users with 2 aims:
 1. To present cognitive tests to the user that assess cognition
 2. To help the user learn more about dementia by responding to questions
 
+## Landing page:
+
 ![Image of App](https://github.com/srdsam/Amicus/blob/master/Images/v1.png)
+
+
+## How many people in the UK have dementia?
+
+
+![Image of App](https://github.com/srdsam/Amicus/blob/master/Images/question_1.png)
