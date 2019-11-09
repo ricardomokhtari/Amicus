@@ -9,7 +9,9 @@ To create a verbal voice assistant AI that converses with users with 2 aims:
 
 ### In its current state, Amicus behaves like a very basic version of Siri/Google Assistant (except text not speech input).
 
-#### More to come!
+#### Coming soon:
+ - Text input format to replaced with speech input
+ - Full cognitive testing suite
 
 ## Landing page:
 
